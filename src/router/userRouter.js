@@ -16,6 +16,7 @@ userRouter.get('/home', auth, (req, res) => {
 
     return res.render('homeForm', {
         layout: 'user',
+        username: req.user.username,
         ...req.user.home
     });
 })
@@ -28,6 +29,7 @@ userRouter.get('/color', auth, (req, res) => {
 
     return res.render('colorForm', {
         layout: 'user',
+        username: req.user.username,
         ...req.user.color
     });
 })
