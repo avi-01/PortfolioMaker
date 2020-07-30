@@ -1,11 +1,11 @@
 @import "../var.css";
 @import "home.css";
 @import "skills.css";
+@import "projects.css";
 
 * {
     padding:0;
     margin:0;
-    overflow: hidden;
 }
 
 body {
@@ -14,6 +14,7 @@ body {
     grid-template-columns: 1fr;
     grid-template-rows: max(8vw,8vh) auto;
     background: linear-gradient(to right bottom,var(--mediumback), var(--darkback));
+    background-attachment: fixed;
     width: 100vw;
     height: 100vh;
 }

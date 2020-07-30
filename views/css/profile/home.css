@@ -7,6 +7,7 @@
     grid-template-rows: 2fr 12vh;
     grid-template-columns: 1fr 1fr;
     font-family: 'Lato';
+    overflow: hidden;
 }
 
 .back {
@@ -90,13 +91,13 @@
     justify-content: space-around;
 }
 
-.fab {
+.profilelinks .fab {
     font-size: 2em;
     padding: 1em;
     color: var(--mediumback);
 }
 
-.fab:hover{
+.profilelinks .fab:hover{
     cursor: pointer;
     color: var(--lightfont);
 }

@@ -38,6 +38,18 @@ save.addEventListener('click', (e) => {
         data[inputTag] = val;
     })
 
+    const textChild = form.getElementsByTagName("textarea");
+
+    const arrText = Array.from(textChild);
+
+    arrText.forEach( (c) => {
+        
+        const textTag = c.getAttribute("id");
+        const val = c.value;
+        
+        data[textTag] = val;
+    })
+
     //console.log(data);
     
 

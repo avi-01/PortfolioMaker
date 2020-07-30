@@ -99,6 +99,35 @@ const userSchema = new Schema({
             default: "#e5ff00"
         }
     },
+    projects: {
+        ptitle1: {
+            type: String,
+        },
+        pdesc1: {
+            type: String,
+        },
+        purl1: {
+            type: String
+        },
+        ptitle2: {
+            type: String,
+        },
+        pdesc2: {
+            type: String,
+        },
+        purl2: {
+            type: String
+        },
+        ptitle3: {
+            type: String,
+        },
+        pdesc3: {
+            type: String,
+        },
+        purl3: {
+            type: String
+        }
+    },
     tokens: [{
         token: {
             type: String,
@@ -219,7 +248,7 @@ userSchema.methods.colorValidation = async function () {
     const color = this.color;
 
     for (var colorCode in color.keys) {
-        //console.log(colorCode, color[colorCode])
+        console.log(colorCode, color[colorCode])
         if (colorCode != "$init" && !validator.matches(color[colorCode], "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")) {
             return { ok: false, error: "Color Code is invalid" };
         }
@@ -228,6 +257,37 @@ userSchema.methods.colorValidation = async function () {
     return { ok: true, error: "" };
 }
 
+
+userSchema.methods.projectValidation = async function () {
+    
+    const projects = this.projects;
+
+    // console.log(projects)
+
+    for (var project in projects) {
+        // console.log(project, project.length,)
+        var field = project.substring(1, project.length - 1);
+        var num = project[project.length - 1];
+        var val = projects[project];
+
+        // console.log(field,num,val)
+        
+        if (field == "title" && !validator.matches(val, "^[\ a-zA-Z\_\-]*$")) {
+                return { ok: false, error: "Project " + num + ": Title is incorrect" };
+        }
+        
+        else if (field == "desc" && val.match(/<script\b[^>]*>([\s\S]*?)<\/script>/) != null) {
+            return { ok: false, error: "Project " + num + ": Description is incorrect" };
+        }
+            
+        else if (field == "url" && val.length > 0 && ( val.match(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/) == null || val.match(/<script\b[^>]*>([\s\S]*?)<\/script>/) != null)) {
+            return { ok: false, error: "Project " + num + ": Url is incorrect" };
+        }
+    }
+
+    
+    return { ok: true, error: "" };
+}
 
 userSchema.pre('save', function (next) {
 

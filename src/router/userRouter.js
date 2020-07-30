@@ -35,6 +35,17 @@ userRouter.get('/color', auth, (req, res) => {
 })
 
 
+userRouter.get('/projects', auth, (req, res) => {
+
+    return res.render('projectsForm', {
+        layout: 'user',
+        username: req.user.username,
+        ...req.user.projects
+    });
+})
+
+
+
 userRouter.post('/home', auth, async (req, res) => {
 
     //console.log(req.body)
@@ -70,6 +81,34 @@ userRouter.post('/color', auth, async (req, res) => {
     
     
     const okSave = await req.user.colorValidation();
+
+    //console.log(okSave)
+
+    if (!okSave.ok) {
+        return res.status(400).send({ error: okSave.error });
+    }
+
+    req.user.save().then( async () => {
+        //console.log(req.user)
+        return res.status(200).send(req.user);
+    }).catch( (e) => {
+        //console.log(e)
+        return res.status(400).send(e);
+    })
+
+})
+
+
+
+
+userRouter.post('/projects', auth, async (req, res) => {
+
+    //console.log(req.body)
+
+    req.user.projects = req.body;
+    
+    
+    const okSave = await req.user.projectValidation();
 
     //console.log(okSave)
 

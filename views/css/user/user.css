@@ -148,6 +148,14 @@ a {
     align-items: center;
 }
 
+.input-head {
+    font-size: 4em;
+    align-self: flex-start;
+    font-family: 'Poppins', 'Arial';
+    font-weight: 500;
+    padding: 0.5em 0;
+}
+ 
 .input-container {
     margin: 1.5em 0em;
     display: flex;
@@ -157,7 +165,7 @@ a {
     width: 100%;
 }
 
-.input-container input {
+.input-container input, .input-container textarea {
     box-sizing: border-box;
     display: block;
     width: 100%;
@@ -169,6 +177,10 @@ a {
     outline: none;
 }
 
+.input-container textarea {
+    resize: vertical;
+}
+    
 input[type="color"] {
     border: none;
     padding: 0.2em;
@@ -243,6 +255,7 @@ button:hover {
 
     #form-nav-items {
         flex-direction: row;
+        font-size: smaller;
     }
 
     #login-form {
