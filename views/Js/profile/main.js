@@ -1,6 +1,5 @@
 // import "./home.js"
 // import "../skills.js"
-import "./home.js"
 
 const root = document.documentElement;
 
