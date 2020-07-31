@@ -15,7 +15,7 @@ const getColor = function () {
 
     //console.log(location + "/color")
 
-    req.open('GET', location + "../color", true);
+    req.open('GET', location + "/../color", true);
     req.send();
 
     req.onload = () => {
