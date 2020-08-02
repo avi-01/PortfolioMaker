@@ -145,7 +145,11 @@ userRouter.post('/signup', async (req,res) => {
     user.save().then( async () => {
         const token = await user.generateAuthToken();
         //console.log(user)
-        res.cookie('authToken', token);
+        res.cookie('authToken', token, {
+            sameSite: 'strict',
+            maxAge: 14000000,
+            path: '/user'
+        });
         return res.status(201).send({user, token});
     }).catch( (e) => {
         //console.log(e)
@@ -166,7 +170,11 @@ userRouter.post('/login', (req,res) => {
 
         const token = await user.generateAuthToken();
         //console.log(user)
-        res.cookie('authToken', token);
+        res.cookie('authToken', token, {
+            sameSite: 'strict',
+            maxAge: 14000000,
+            path: '/user'
+        });
         return res.status(200).send({user, token});
     }).catch((e) => {
         return res.status(400).send(e.toString());
